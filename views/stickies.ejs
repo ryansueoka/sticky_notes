@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <% include ./partials/head %>
+ </head>
+ <body>
+   <header>
+     <% include ./partials/header %>
+   </header>
+   <h1 class='center'>My Sticky Notes</h1>
+   <hr />
+   <div class='row'>
+     <div class='col s12 m4'>
+       <h3>Add Sticky</h3>
+       <form action='/stickies' method='post'>
+         <input type='text' name='title' placeholder='name' />
+         <input type='text' name='description' placeholder='note'>
+         <button class='btn btn-waves' type='submit'>Add</button>
+       </form>
+     </div>
+     <table class='table col m8 s12'>
+       <thead>
+         <th>Subject</th> 
+         <th>Note</th>
+         <th>Delete</th>
+       </thead>
+       <tbody>
+         <% stickies.forEach( function(sticky) { %>
+           <% action = '/stickies/' + sticky.id %>
+           <tr>
+            <td><a href=<%= action %>><%= sticky.title %></a></td>
+            <td><%= sticky.description %></td>
+            <td>
+              <form action=<%= action %> method='POST'>
+                <button class= 'btn waves-effect' type='submit'>Delete</button>
+              </form>
+            </td>
+         <% }); %>
+       </tbody>
+     </table>
+   </body>
+</html>
